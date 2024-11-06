@@ -3,6 +3,7 @@ import { DatasetQueryValues, GetOrganoidResponse, GetOrganoidsResponse } from '@
 import { IOrganoidRepository } from './contracts/organoid.repo';
 import { Storage } from '@google-cloud/storage';
 import { DEFAULT_IMG_URL_EXPIRATION_MILLIS, GCP_BUCKET_NAME, GCP_PROJECT_ID } from 'src/config';
+import { computeContrast } from 'src/utils';
 
 const storage = new Storage({
   projectId: GCP_PROJECT_ID,
@@ -17,27 +18,31 @@ export class OrganoidService {
     const organoid = await this.organoidRepository.getOrganoid(id);
     if (!organoid) throw new NotFoundException({ entity: 'organoid' });
 
-    // Get Original img URL
-    const originalImgUri = await bucket.file(organoid.originalImageKey).getSignedUrl({
+    // Get Original img URL & File
+    const originalImageFile = bucket.file(organoid.originalImageKey);
+    const [originalImageBuffer] = await originalImageFile.download();
+    const [originalImgUri] = await originalImageFile.getSignedUrl({
       version: 'v4',
       action: 'read',
       expires: Date.now() + DEFAULT_IMG_URL_EXPIRATION_MILLIS,
     });
 
     // Get Segmentation img URL
-    const segmentationMaskUri = await bucket.file(organoid.segmentationMaskKey).getSignedUrl({
+    const [segmentationMaskUri] = await bucket.file(organoid.segmentationMaskKey).getSignedUrl({
       version: 'v4',
       action: 'read',
       expires: Date.now() + DEFAULT_IMG_URL_EXPIRATION_MILLIS,
     });
 
     // Calculate metrics
+    const contrast = await computeContrast(originalImageBuffer.buffer);
+
     return {
       id: organoid.id,
       maskSurface: organoid.maskSurface,
-      originalImgUri: originalImgUri[0],
-      segmentationMaskUri: segmentationMaskUri[0],
-      contrast: 0,
+      originalImgUri: originalImgUri,
+      segmentationMaskUri: segmentationMaskUri,
+      contrast,
       brightness: 0,
     };
   }
