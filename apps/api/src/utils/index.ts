@@ -32,3 +32,21 @@ export const computeContrast = async (buffer: ArrayBuffer): Promise<number> => {
 
   return contrast;
 };
+
+export const computeBrightness = async (buffer: ArrayBuffer): Promise<number> => {
+  const data = await sharp(buffer).raw().toBuffer();
+
+  let totalBrightness = 0;
+  for (let i = 0; i < data.length; i += 3) {
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+
+    // Calculate perceived brightness using weighted luminance
+    totalBrightness += 0.299 * r + 0.587 * g + 0.114 * b;
+  }
+
+  const brightness = totalBrightness / (data.length / 3);
+
+  return brightness;
+};

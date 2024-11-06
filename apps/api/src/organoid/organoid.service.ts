@@ -3,7 +3,7 @@ import { DatasetQueryValues, GetOrganoidResponse, GetOrganoidsResponse } from '@
 import { IOrganoidRepository } from './contracts/organoid.repo';
 import { Storage } from '@google-cloud/storage';
 import { DEFAULT_IMG_URL_EXPIRATION_MILLIS, GCP_BUCKET_NAME, GCP_PROJECT_ID } from 'src/config';
-import { computeContrast } from 'src/utils';
+import { computeBrightness, computeContrast } from 'src/utils';
 
 const storage = new Storage({
   projectId: GCP_PROJECT_ID,
@@ -36,6 +36,7 @@ export class OrganoidService {
 
     // Calculate metrics
     const contrast = await computeContrast(originalImageBuffer.buffer);
+    const brightness = await computeBrightness(originalImageBuffer.buffer);
 
     return {
       id: organoid.id,
@@ -43,7 +44,7 @@ export class OrganoidService {
       originalImgUri: originalImgUri,
       segmentationMaskUri: segmentationMaskUri,
       contrast,
-      brightness: 0,
+      brightness,
     };
   }
 
