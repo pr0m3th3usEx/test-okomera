@@ -8,16 +8,16 @@ export class Organoid {
   @Prop({ type: mongoose.Types.ObjectId, required: true })
   id: string;
 
-  @Prop({ required: true })
-  imageName: string;
-
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   originalImageKey: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
   segmentationMaskImageKey: string;
 
-  @Prop({ required: true })
+  @Prop({ type: String, required: true })
+  dataset: string;
+
+  @Prop({ type: Number, required: true })
   maskSurface: number;
 }
 
