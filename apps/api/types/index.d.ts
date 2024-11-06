@@ -1,19 +1,14 @@
 // API types
 declare module '@okomera/api' {
   import { DATASET_NAMES } from '../types';
-
-  interface DatabaseRepositoryAdapter {
-    getOrganoid(id: string): Promise<void>;
-    getOrganoids(): Promise<void>;
+  interface Organoid {
+    id: string;
+    imageName: string;
+    orignalImageKey: string;
+    segmentationMaskKey: string;
+    maskSurface: number;
   }
 
-  // interface DatabaseOrganoid {
-  //   id: string;
-  //   image_name: string;
-  //   orignalImageKey: string;
-  //   segmentationMaskKey: string;
-  //   maskSurface: number;
-  // }
   const DATASET_NAMES = ['training', 'testing', 'validation'] as const;
 
   type DatasetQueryValues = (typeof DATASET_NAMES)[number];
