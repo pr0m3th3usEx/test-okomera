@@ -5,8 +5,14 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
+  @Get('organoids')
+  async getOrganoids(): Promise<string> {
     return this.appService.getHello();
+  }
+
+  @Get('organoids/:id')
+  async getOrganoid(): Promise<void> {
+    // TODO
+    return;
   }
 }
