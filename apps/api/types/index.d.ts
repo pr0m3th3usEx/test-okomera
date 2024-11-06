@@ -3,7 +3,7 @@ declare module '@okomera/api' {
   import { DATASET_NAMES } from '../types';
   interface Organoid {
     id: string;
-    orignalImageKey: string;
+    originalImageKey: string;
     segmentationMaskKey: string;
     maskSurface: number;
   }
@@ -17,7 +17,7 @@ declare module '@okomera/api' {
   }
 
   interface GetOrganoidsResponse {
-    items: Pick<GetOrganoidResponse, 'id' | 'imageName'>[];
+    items: Pick<GetOrganoidResponse, 'id'>[];
     count: number;
   }
 

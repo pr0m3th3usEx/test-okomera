@@ -9,11 +9,27 @@ import { Organoid as MongoOrganoid } from './mongo/schema';
 export class MongoOrganoidRepository implements IOrganoidRepository {
   constructor(@InjectModel(MongoOrganoid.name) private organoidModel: Model<MongoOrganoid>) {}
 
-  getOrganoid(_id: string): Promise<Organoid | null> {
-    throw new Error('Method not implemented.');
+  async getOrganoid(id: string): Promise<Organoid | null> {
+    const result = await this.organoidModel.findOne({ _id: id }).exec();
+
+    return result
+      ? {
+          id: result.id.toString(),
+          maskSurface: result.maskSurface,
+          originalImageKey: result.originalImageKey,
+          segmentationMaskKey: result.segmentationMaskImageKey,
+        }
+      : null;
   }
 
-  getOrganoids(): Promise<Array<Organoid>> {
-    throw new Error('Method not implemented.');
+  async getOrganoids(dataset: string): Promise<Array<Organoid>> {
+    const result = await this.organoidModel.find({ dataset }).exec();
+
+    return result.map((dbOrganoid) => ({
+      id: dbOrganoid.id.toString(),
+      maskSurface: dbOrganoid.maskSurface,
+      originalImageKey: dbOrganoid.originalImageKey,
+      segmentationMaskKey: dbOrganoid.segmentationMaskImageKey,
+    }));
   }
 }

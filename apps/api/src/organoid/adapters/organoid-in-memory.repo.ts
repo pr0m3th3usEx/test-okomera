@@ -10,7 +10,7 @@ export class OrganoidRepositoryInMemory implements IOrganoidRepository {
     return this.organoids.find((o) => o.id === id);
   }
 
-  async getOrganoids(): Promise<Array<Organoid>> {
+  async getOrganoids(_dataset: string): Promise<Array<Organoid>> {
     return this.organoids;
   }
 }
