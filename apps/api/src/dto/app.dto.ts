@@ -1,5 +1,7 @@
-import { DATASET_NAMES, DatasetQueryValues, GetOrganoidRequestParams, GetOrganoidsRequestQuery } from '@okomera/api';
+import { DatasetQueryValues, GetOrganoidRequestParams, GetOrganoidsRequestQuery } from '@okomera/api';
 import { IsIn, IsString } from 'class-validator';
+
+const DATASET_NAMES = ['training', 'testing', 'validation'] as const;
 
 export class GetOrganoidRequestParamsDto implements GetOrganoidRequestParams {
   @IsString()

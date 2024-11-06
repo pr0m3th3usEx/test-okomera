@@ -20,5 +20,6 @@
     "noFallthroughCasesInSwitch": false,
     "types": ["./types", "node"]
   },
+  "include": ["src/**/*.ts", "types/**/*.ts"],
   "exclude": ["dist", "node_modules"]
 }
