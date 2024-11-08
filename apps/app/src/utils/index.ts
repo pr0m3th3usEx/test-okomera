@@ -18,3 +18,9 @@ export function URLBuild(base: string, params: Record<string, any> = {}): string
 
   return url.toString();
 }
+
+export const DatasetEnumObj = {
+  TRAINING: 'training',
+  TESTING: 'testing',
+  VALIDATION: 'validation',
+} as const;

@@ -1,5 +1,11 @@
+import NavigationBar from './components/widgets/navigation-bar/index';
+
 function App() {
-  return <>Tesst</>;
+  return (
+    <>
+      <NavigationBar />
+    </>
+  );
 }
 
 export default App;
