@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 
 // Function to calculate standard deviation contrast
-function calculateStandardDeviationContrast(pixelValues: number[]) {
+function _calculateStandardDeviationContrast(pixelValues: number[]) {
   const mean = pixelValues.reduce((sum, value) => sum + value, 0) / pixelValues.length;
   const variance = pixelValues.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) / pixelValues.length;
   return Math.sqrt(variance); // Standard deviation

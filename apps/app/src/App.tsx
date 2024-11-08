@@ -1,10 +1,17 @@
-import NavigationBar from './components/widgets/navigation-bar/index';
+import { Text } from '@chakra-ui/react';
+import AppLayout from './components/AppLayout';
+import DatasetProvider from './contexts/DatasetProvider';
+import DatasetSelectedGuard from './guards/DatasetSelectedGuard';
 
 function App() {
   return (
-    <>
-      <NavigationBar />
-    </>
+    <DatasetProvider>
+      <AppLayout>
+        <DatasetSelectedGuard>
+          <Text>Test</Text>
+        </DatasetSelectedGuard>
+      </AppLayout>
+    </DatasetProvider>
   );
 }
 
