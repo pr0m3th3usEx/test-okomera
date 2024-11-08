@@ -4,7 +4,7 @@ import config from '@/utils/config';
 import { GetOrganoidRequest, GetOrganoidResponse } from '@okomera/api';
 
 function useGetOrganoidQuery({ organoidId }: GetOrganoidRequest) {
-  return useApiQuery<GetOrganoidResponse, unknown>(['organoids', organoidId], {
+  return useApiQuery<GetOrganoidResponse, unknown>(['organoid', organoidId], {
     path: URLBuild(`${config.apiGatewayUrl}/organoids/${organoidId}`),
   });
 }

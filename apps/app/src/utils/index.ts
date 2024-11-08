@@ -16,6 +16,8 @@ export function URLBuild(base: string, params: Record<string, any> = {}): string
     }
   });
 
+  url.pathname = url.pathname.replace(/\/{2,}/g, '/');
+
   return url.toString();
 }
 

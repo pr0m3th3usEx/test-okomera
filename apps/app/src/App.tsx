@@ -1,6 +1,6 @@
-import { Text } from '@chakra-ui/react';
 import AppLayout from './components/AppLayout';
 import DatasetProvider from './contexts/DatasetProvider';
+import DatasetManager from './DatasetManager';
 import DatasetSelectedGuard from './guards/DatasetSelectedGuard';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <DatasetProvider>
       <AppLayout>
         <DatasetSelectedGuard>
-          <Text>Test</Text>
+          <DatasetManager />
         </DatasetSelectedGuard>
       </AppLayout>
     </DatasetProvider>
