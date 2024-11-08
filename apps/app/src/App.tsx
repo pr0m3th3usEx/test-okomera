@@ -1,4 +1,4 @@
-import AppLayout from './components/AppLayout';
+import AppLayout from './components/layouts/AppLayout';
 import DatasetProvider from './contexts/DatasetProvider';
 import DatasetManager from './DatasetManager';
 import DatasetSelectedGuard from './guards/DatasetSelectedGuard';

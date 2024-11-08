@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/react';
-import NavigationBar from './widgets/navigation-bar';
+import NavigationBar from '../widgets/navigation-bar';
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
