@@ -1,7 +1,13 @@
 import useDatasetMetadataContext from '@/hooks/contexts/useDatasetMetadataContext';
 import { Box, Text, VStack } from '@chakra-ui/react';
 
-const DatasetImageExplorer = () => {
+const DatasetOrganoidExplorer = ({
+  onSelect,
+  organoidSelected,
+}: {
+  onSelect: (id: string) => void;
+  organoidSelected: string | undefined;
+}) => {
   const { items, count } = useDatasetMetadataContext();
 
   return (
@@ -9,7 +15,14 @@ const DatasetImageExplorer = () => {
       <Text fontWeight="semibold">Nombre de photos: {count}</Text>
       <VStack w="100%" overflow="auto" gap={0}>
         {items.map(({ id }, index) => (
-          <Box w="100%" p="18px 12px" cursor="pointer" _hover={{ bg: '#3182CE20' }} onClick={() => console.log(id)}>
+          <Box
+            w="100%"
+            p="18px 12px"
+            cursor="pointer"
+            _hover={{ bg: '#3182CE20' }}
+            onClick={() => onSelect(id)}
+            {...{ bg: id === organoidSelected ? '#3182CE20' : undefined }}
+          >
             <Text fontSize="sm">Image {index}</Text>
           </Box>
         ))}
@@ -18,4 +31,4 @@ const DatasetImageExplorer = () => {
   );
 };
 
-export default DatasetImageExplorer;
+export default DatasetOrganoidExplorer;

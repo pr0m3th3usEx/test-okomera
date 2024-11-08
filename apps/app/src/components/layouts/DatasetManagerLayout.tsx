@@ -1,15 +1,19 @@
-import { Box, Grid, GridItem } from '@chakra-ui/react';
-import DatasetImageExplorer from '../widgets/dataset-image-explorer';
+import { Grid, GridItem } from '@chakra-ui/react';
+import DatasetOrganoidExplorer from '../widgets/dataset-organoid-explorer';
+import { useState } from 'react';
+import OrganoidPanel from '@/OrganoidPanel';
 
 const DatasetManagerLayout = () => {
+  const [organoidId, setOrganoidId] = useState<string>();
+
   return (
     <Grid w="100%" h="100vh" templateColumns="repeat(6, 1fr)">
       <GridItem colSpan={1} p="12px">
-        <DatasetImageExplorer />
+        <DatasetOrganoidExplorer onSelect={setOrganoidId} organoidSelected={organoidId} />
       </GridItem>
 
       <GridItem colSpan={5} p="12px">
-        <Box w="100%" bg="red" h="100%" />
+        <OrganoidPanel organoidSelected={organoidId} />
       </GridItem>
     </Grid>
   );
