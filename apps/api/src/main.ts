@@ -12,6 +12,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(PORT);
+
+  await app.listen(`${PORT}`);
+  console.log(`App run at ${await app.getUrl()}`);
 }
 bootstrap();
