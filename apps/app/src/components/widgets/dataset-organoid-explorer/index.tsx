@@ -11,7 +11,7 @@ const DatasetOrganoidExplorer = ({
   const { items, count } = useDatasetMetadataContext();
 
   return (
-    <VStack w="100%" bg="#0C0E2E" h="100%" py="8px" gap="24px">
+    <VStack w="100%" bg="#0C0E2E" h="calc(100% - 16px)" py="8px" gap="24px">
       <Text fontWeight="semibold">Nombre de photos: {count}</Text>
       <VStack w="100%" overflow="auto" gap={0}>
         {items.map(({ id }, index) => (
