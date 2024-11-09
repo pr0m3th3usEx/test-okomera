@@ -8,7 +8,7 @@ const DatasetManagerLayout = () => {
 
   return (
     <Grid w="100%" h="100vh" templateColumns="repeat(6, 1fr)">
-      <GridItem colSpan={1} p="12px">
+      <GridItem colSpan={1} p="12px" minW="233px">
         <DatasetOrganoidExplorer onSelect={setOrganoidId} organoidSelected={organoidId} />
       </GridItem>
 

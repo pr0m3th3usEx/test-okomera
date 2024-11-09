@@ -16,6 +16,7 @@ const DatasetOrganoidExplorer = ({
       <VStack w="100%" overflow="auto" gap={0}>
         {items.map(({ id }, index) => (
           <Box
+            key={id}
             w="100%"
             p="18px 12px"
             cursor="pointer"

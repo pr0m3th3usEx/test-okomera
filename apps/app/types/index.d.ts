@@ -1,8 +1,6 @@
 declare module '@okomera/api' {
   interface Organoid {
     id: string;
-    originalImageKey: string;
-    segmentationMaskKey: string;
     maskSurface: number;
   }
 
@@ -20,11 +18,11 @@ declare module '@okomera/api' {
   };
 
   interface GetOrganoidRequest {
-    organoidId: string;
+    organoidId?: string;
   }
 
   interface GetOrganoidResponse extends Organoid {
-    originalImageUri: string;
+    originalImgUri: string;
     segmentationMaskUri: string;
     contrast: number;
     brightness: number;
