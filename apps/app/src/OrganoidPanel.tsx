@@ -35,7 +35,7 @@ const OrganoidPanel = ({ organoidSelected }: { organoidSelected: string | undefi
   if (!organoidSelected) {
     return (
       <VStack w="100%" bg="#202129" h="100%" py="8px" gap="24px">
-        <Text>Selectionner un organoid</Text>
+        <Text color="white">Selectionner un organoid</Text>
       </VStack>
     );
   }
@@ -53,7 +53,7 @@ const OrganoidPanel = ({ organoidSelected }: { organoidSelected: string | undefi
   if (error) {
     <VStack w="100%" bg="#202129" h="100%" py="8px" gap="24px">
       <Center w="100%" h="100%">
-        <Text>Erreur lors du chargement de l'organoid</Text>
+        <Text color="white">Erreur lors du chargement de l'organoid</Text>
       </Center>
     </VStack>;
   }
@@ -63,10 +63,10 @@ const OrganoidPanel = ({ organoidSelected }: { organoidSelected: string | undefi
       <VStack w="100%" bg="#202129" h="100%" py="8px">
         <VStack w="100%" maxW="800px" alignItems="center" gap="32px">
           <VStack alignItems="center" gap="12px">
-            <Heading>Metrics</Heading>
-            <Text>Surface des masques: {data.maskSurface}</Text>
-            <Text>Contraste: {data.contrast}</Text>
-            <Text>Luminosité: {data.brightness}</Text>
+            <Heading color="white">Metrics</Heading>
+            <Text color="white">Surface des masques: {data.maskSurface}</Text>
+            <Text color="white">Contraste: {data.contrast}</Text>
+            <Text color="white">Luminosité: {data.brightness}</Text>
           </VStack>
 
           <BlendModeOverlay originalUrl={data.originalImgUri} maskUrl={data.segmentationMaskUri} />

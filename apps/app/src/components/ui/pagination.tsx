@@ -172,7 +172,7 @@ export const PaginationPageText = forwardRef<HTMLParagraphElement, PageTextProps
     }, [format, page, pages.length, pageRange, count]);
 
     return (
-      <Text fontWeight="medium" ref={ref} {...rest}>
+      <Text color="white" fontWeight="medium" ref={ref} {...rest}>
         {content}
       </Text>
     );

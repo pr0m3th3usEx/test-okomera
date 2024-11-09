@@ -1,5 +1,10 @@
 # Technical test Okomera
 
+- Installation
+- Setup Google Cloud
+- Docker build
+- Setup environment
+- Run project
 
 Endpoints API:
 
@@ -22,8 +27,8 @@ Response:
 ```json
 {
     "id": "...",
-    "orginal_img_uri": "...",
-    "segmentation_mask_uri": "...",
+    "orginalImgUri": "...",
+    "segmentationMaskUri": "...",
     "mask_surface": 0.0,
     "contrast": 0,
     "brightness": 0,
@@ -51,7 +56,7 @@ Corresponding error:
 
 ```sh
 
-ggcloud alpha storage sign-url "gs://okomera-organoids/testing/1aa09be6-2de9-48f1-9307-2b2a148c023d-original" \
+gcloud alpha storage sign-url "gs://okomera-organoids/testing/1aa09be6-2de9-48f1-9307-2b2a148c023d-original" \
   --billing-project "test-okomera" \
   --impersonate-service-account "test-okomera@test-okomera.iam.gserviceaccount.com" \
   --duration=15m

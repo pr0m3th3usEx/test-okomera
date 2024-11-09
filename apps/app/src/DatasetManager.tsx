@@ -17,7 +17,7 @@ const DatasetManager = () => {
   if (error) {
     return (
       <VStack>
-        <Text>Impossible de charger le dataset</Text>
+        <Text color="white">Impossible de charger le dataset</Text>
         <Button onClick={revalidate}>Réessayer</Button>
       </VStack>
     );
