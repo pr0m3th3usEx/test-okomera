@@ -41,17 +41,21 @@ This project is a technical proof of concept for Okomera. It provides a full-sta
 
 2. **Database & Environment Variables:**
    - **Seed MongoDB Database with Metadata:**
-     1. Place the `MouseOrganoids` dataset folder at the root of the repository.
-     2. Configure the environment variables in a `.env` file at the root level with the following structure:
+    1. Place the `MouseOrganoids` dataset folder at the root of the repository.
+    2. Configure the environment variables in a `.env` file at the root level with the following structure (example into `apps/api/env.example`):
         ```env
         DATABASE_URL=mongodb://random:password@localhost:27017/
         PORT=3000
         GCP_PROJECT_ID=---GCP-PROJECT-ID---
         GCP_BUCKET_NAME=---GCP-BUCKET-NAME---
         ```
-     3. Run the database seed script:
+    3. Update the environment of `api` service into docker-compose.prod.yaml
+    3. Run the database seed script:
         ```bash
         cd apps/api
+        set -a
+        source .env
+        set +a
         pnpm i
         pnpm run db:seed
         ```
@@ -66,5 +70,5 @@ docker-compose -f docker-compose.prod.yaml up
 
 ## 3. Run Application
 
-Once the application stack is up, access the frontend at `http://localhost:[PORT]`. The frontend will connect to the backend API and allow you to view and analyze organoid 
+Once the application stack is up, access the frontend at `http://localhost:4173`. The frontend will connect to the backend API and allow you to view and analyze organoid 
 images with segmentation overlays.
