@@ -1,10 +1,72 @@
-# Technical test Okomera
+# Okomera Organoid Visualization & Analysis App
 
-- Installation
-- Setup Google Cloud
-- Docker build
-- Setup environment
-- Run project
+## 1. Introduction
+
+This project is a technical proof of concept for Okomera. It provides a full-stack application to visualize and analyze images of mouse organoids, with segmentation overlays to help biomedical researchers analyze samples more effectively. Built with a React frontend and a Node.js backend, the application allows for interactive viewing and basic analysis of organoid images hosted on Google Cloud Storage, with metadata managed in MongoDB.
+
+## 2. Setup
+
+### A. Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pr0m3th3usEx/test-okomera.git
+   ```
+
+2. **Build Docker Images:**
+   - For the web app:
+     ```bash
+     docker build -t okomera_app:test --target app .
+     ```
+   - For the API:
+     ```bash
+     docker build -t okomera_api:test --target api .
+     ```
+
+3. **Google Cloud Services Configuration:**
+   - This app uses Google Cloud Storage to store organoid images.
+   - **Steps:**
+     1. Create a project on the Google Cloud Console and set up a Google Cloud Storage bucket.
+     2. Create a service account with the `roles/iam.serviceAccountTokenCreator` role to handle bucket interactions.
+     3. Add the `roles/iam.serviceAccountTokenCreator` role to your account to allow impersonation.
+
+### B. Configure Environment
+
+1. **Install Google Cloud Platform CLI Tools:**
+   - Install `gcloud` on your local environment to enable Google Cloud service authentication.
+   - Authenticate with the impersonated service account:
+     ```bash
+     gcloud auth application-default login --impersonate-service-account [your-service-account]
+     ```
+
+2. **Database & Environment Variables:**
+   - **Seed MongoDB Database with Metadata:**
+     1. Place the `MouseOrganoids` dataset folder at the root of the repository.
+     2. Configure the environment variables in a `.env` file at the root level with the following structure:
+        ```env
+        DATABASE_URL=mongodb://random:password@localhost:27017/
+        PORT=3000
+        GCP_PROJECT_ID=---GCP-PROJECT-ID---
+        GCP_BUCKET_NAME=---GCP-BUCKET-NAME---
+        ```
+     3. Run the database seed script:
+        ```bash
+        cd apps/api
+        pnpm i
+        pnpm run db:seed
+        ```
+
+### C. Run Full Application Stack
+
+Use Docker Compose to set up the application stack with the production configuration:
+
+```bash
+docker-compose -f docker-compose.prod.yaml up
+```
+
+## 3. Run Application
+
+Once the application stack is up, access the frontend at `http://localhost:[PORT]`. The frontend will connect to the backend API and allow you to view and analyze organoid images with segmentation overlays.
 
 Endpoints API:
 
@@ -33,40 +95,4 @@ Response:
     "contrast": 0,
     "brightness": 0,
 }
-```
-
-### Database models
-
-Organoid:
-
-- id: `String`
-- dataset: `String | Enum`
-- image_name: `String`
-- original_img_key: `String`
-- segmentation_mask_key: `String`
-- mask_surface: `Double`
-
-----
-
-For Google Cloud Storage signed url generation:
--  Create service account for the project
-- Grant permissions: using role 'Créateur de jetons du compte de service' (roles/iam.serviceAccountTokenCreator) to the service Account to service account and the account that is trying to impersonate it
-
-Corresponding error:
-
-```sh
-
-gcloud alpha storage sign-url "gs://okomera-organoids/testing/1aa09be6-2de9-48f1-9307-2b2a148c023d-original" \
-  --billing-project "test-okomera" \
-  --impersonate-service-account "test-okomera@test-okomera.iam.gserviceaccount.com" \
-  --duration=15m
-
-WARNING: This command is using service account 
-impersonation. All API calls will be executed as [test-okomera@test-okomera.iam.gserviceaccount.com].
-ERROR: (gcloud.alpha.storage.sign-url) PERMISSION_DENIED: Failed to impersonate [test-okomera@test-okomera.iam.gserviceaccount.com]. Make sure the account that's trying to impersonate it has access to the service account itself and the "roles/iam.serviceAccountTokenCreator" role. Permission 'iam.serviceAccounts.getAccessToken' denied on resource (or it may not exist). This command is authenticated as twilson.freelance@gmail.com which is the active account specified by the [core/account] property. Impersonation is used to impersonate test-okomera@test-okomera.iam.gserviceaccount.com.
-- '@type': type.googleapis.com/google.rpc.ErrorInfo
-  domain: iam.googleapis.com
-  metadata:
-    permission: iam.serviceAccounts.getAccessToken
-  reason: IAM_PERMISSION_DENIED
 ```
