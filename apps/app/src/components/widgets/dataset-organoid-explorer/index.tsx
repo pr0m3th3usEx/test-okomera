@@ -1,5 +1,6 @@
-import useDatasetMetadataContext from '@/hooks/contexts/useDatasetMetadataContext';
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { useBreakpointValue } from '@chakra-ui/react';
+import DatasetOrganoidExplorerDesktop from './desktop';
+import DatasetOrganoidExplorerMobile from './mobile';
 
 const DatasetOrganoidExplorer = ({
   onSelect,
@@ -8,28 +9,13 @@ const DatasetOrganoidExplorer = ({
   onSelect: (id: string) => void;
   organoidSelected: string | undefined;
 }) => {
-  const { items, count } = useDatasetMetadataContext();
+  const size = useBreakpointValue({ base: 'sm', md: 'lg' }) as 'sm' | 'lg';
 
-  return (
-    <VStack w="100%" bg="#0C0E2E" h="calc(100% - 16px)" py="8px" gap="24px">
-      <Text fontWeight="semibold">Nombre de photos: {count}</Text>
-      <VStack w="100%" overflow="auto" gap={0}>
-        {items.map(({ id }, index) => (
-          <Box
-            key={id}
-            w="100%"
-            p="18px 12px"
-            cursor="pointer"
-            _hover={{ bg: '#3182CE20' }}
-            onClick={() => onSelect(id)}
-            {...{ bg: id === organoidSelected ? '#3182CE20' : undefined }}
-          >
-            <Text fontSize="sm">Image {index}</Text>
-          </Box>
-        ))}
-      </VStack>
-    </VStack>
-  );
+  if (size === 'sm') {
+    return <DatasetOrganoidExplorerMobile organoidSelected={organoidSelected} onSelect={onSelect} />;
+  }
+
+  return <DatasetOrganoidExplorerDesktop organoidSelected={organoidSelected} onSelect={onSelect} />;
 };
 
 export default DatasetOrganoidExplorer;
