@@ -66,9 +66,12 @@ docker-compose -f docker-compose.prod.yaml up
 
 ## 3. Run Application
 
-Once the application stack is up, access the frontend at `http://localhost:[PORT]`. The frontend will connect to the backend API and allow you to view and analyze organoid images with segmentation overlays.
+Once the application stack is up, access the frontend at `http://localhost:[PORT]`. The frontend will connect to the backend API and allow you to view and analyze organoid 
+images with segmentation overlays.
 
-Endpoints API:
+-----
+
+*Endpoints API*:
 
 - `/organoids?dataset=validation|test|training`: Give the list of organoids data stored
 Response:

@@ -43,7 +43,7 @@ export const FileUploadDropzone = forwardRef<HTMLInputElement, FileUploadDropzon
         </Icon>
         <ChakraFileUpload.DropzoneContent>
           <div>{label}</div>
-          {description && <Text color="white" color="fg.muted">{description}</Text>}
+          {description && <Text color="fg.muted">{description}</Text>}
         </ChakraFileUpload.DropzoneContent>
         {children}
       </ChakraFileUpload.Dropzone>
